@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using MyJetWallet.ApiSecurityManager.Autofac;
 using MyJetWallet.Sdk.RestApiTrace;
-using MyJetWallet.Sdk.Service;
 using Service.Core.Client.Services;
 using Service.TutorialTime.Client;
 
@@ -12,8 +11,7 @@ namespace Service.WalletApi.EducationTimeApi.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			// second parameter is null because we do not store api keys yet for wallet api
-			builder.RegisterEncryptionServiceClient(ApplicationEnvironment.AppName, () => Program.Settings.MyNoSqlWriterUrl);
+			builder.RegisterEncryptionServiceClient();
 
 			builder.RegisterTutorialTimeClient(Program.Settings.EducationTimeServiceUrl, Program.LoggerFactory.CreateLogger(typeof (TutorialTimeClientFactory)));
 
